@@ -3,6 +3,8 @@
 //     texto: string;
 //     prioridade: Prioridade
 // }
+// import {*} from 'uniqid';
+import * as uniqid from 'uniqid';
 
 export class Tarefa {
     feita: boolean;
@@ -11,13 +13,12 @@ export class Tarefa {
     // implementação do Id
     id: string;
 
-    constructor(id:string, texto: string, prioridade: Prioridade){
+    constructor(texto: string, prioridade: Prioridade){
         this.texto = texto;
         this.prioridade = prioridade;
         // this.feita = true;
         this.feita = false;
-        this.id = id;
-
+        this.id = uniqid();
     }
 
     imprimir():void{
@@ -29,6 +30,8 @@ export class Tarefa {
 
     toRow():HTMLTableRowElement{
         let tr = document.createElement('tr');
+        tr.setAttribute('id', this.id);
+        // console.log(this);
         tr.className = this.feita?'done':'';
         // tr.classList.toggle('done');
         tr.innerHTML = `<td><input type="checkbox"></td>

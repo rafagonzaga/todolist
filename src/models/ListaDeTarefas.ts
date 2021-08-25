@@ -1,5 +1,5 @@
 import { Tarefa, Prioridade } from "./Tarefa";
-import uniqid from '../../node_modules/uniqid/index.js';
+// import uniqid from '../../node_modules/uniqid/index.js';
 
 
 export class ListaDeTarefas {
@@ -8,14 +8,14 @@ export class ListaDeTarefas {
     input:HTMLInputElement;
     form:HTMLFormElement;
     tabela:HTMLTableElement;
-    id:string;
+    // id:string;
 
     constructor(main: HTMLElement) {
         this.input = <HTMLInputElement>main.querySelector('#tf_2do');
         this.form = <HTMLFormElement>main.querySelector('#form');
         this.tabela = <HTMLTableElement>main.querySelector('#table');
         this.tarefas = [];
-        this.id = uniqid();
+        // this.id = uniqid();
 
         // Quando o form for submetido, que se adicione uma tarefa.
         this.form.addEventListener('submit', (evt) => {
@@ -39,8 +39,9 @@ export class ListaDeTarefas {
         // let todas = this.tarefas;
         // todas.forEach(e => console.log);
     
-        this.tarefas.splice(this.tarefas.indexOf(t),1)
-        console.log(this);
+        this.tarefas.splice(this.tarefas.indexOf(t),1);
+        document.getElementById(t.id).remove();
+        // console.log(this);
         // this.mostrarTarefas();        
     };
 
@@ -51,7 +52,7 @@ export class ListaDeTarefas {
             return;
 
         // Criar nova tarefa com prioridade baixa e com o texto digitado pelo usuário
-        let t = new Tarefa(uniqid(), this.input.value, Prioridade.Baixa);
+        let t = new Tarefa(this.input.value, Prioridade.Baixa);
         console.log(t);
         this.tarefas.push(t);
         // console.log(uniqid());
@@ -63,7 +64,7 @@ export class ListaDeTarefas {
         let tr = t.toRow()
 
         tr.querySelector('i').addEventListener('click', () => {
-                tr.remove();            // remove visualmente
+                // tr.remove();            // remove visualmente
                 this.removerTarefa(t);  // remove do array tarefas
                 // console.log(this.tarefas);
             }
